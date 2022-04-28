@@ -48,11 +48,13 @@
         <th />
         <th>Name</th>
         <th>Language</th>
+        <th>Website</th>
       </tr>
       {#each oslist as os}
         <tr style:display={os.show ? "" : "none"}>
           <td>{os.name}</td>
           <td>{os.language}</td>
+          <td><a href={os.website}>Website</a></td>
       {/each}
     </table>
   </div>
