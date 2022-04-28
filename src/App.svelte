@@ -1,0 +1,86 @@
+<script>
+  import osListImport from "./data";
+
+  let oslist = osListImport;
+  oslist.forEach((os) => {
+    os.show = true;
+  });
+
+  const handleInput = (e) => {
+    if (!e.target.value) {
+      osListImport.forEach((os, i) => {
+        oslist[i].show = true;
+      });
+    }
+    osListImport.forEach((os, i) => {
+      if (os.name.toLowerCase().includes(e.target.value.toLowerCase())) {
+        oslist[i].show = true;
+      } else {
+        oslist[i].show = false;
+      }
+    });
+  };
+</script>
+<div class="headerbar">
+  <h1>LibraryDB</h1>
+</div>
+  <p>An entire directory worth of libraries for all the languages!</p>
+  <br />
+  <input
+    placeholder="The search function for this software is not available at this time."
+    on:input={handleInput}
+    style="color: black;
+           width: 100%;"
+    type="text"
+    id="searchbox"
+    name="searchbox"
+    list="osdatlist"
+    disabled
+  />
+  <datalist id="osdatlist">
+    {#each oslist as os}
+      <option>{os.name}</option>
+    {/each}
+  </datalist>
+  <div class="card">
+    <table frame="void" rules="rows">
+      <tr>
+        <th />
+        <th>Name</th>
+        <th>Language</th>
+      </tr>
+      {#each oslist as os}
+        <tr style:display={os.show ? "" : "none"}>
+          <td>{os.name}</td>
+          <td>{os.language}</td>
+      {/each}
+    </table>
+  </div>
+<style>
+  td,
+  th {
+    width: 100px;
+  }
+  * {
+    color: white;
+  }
+  .card {
+    font-size: 12pt;
+    height: fit-content;
+    width: fit-content;
+    background-color: #222;
+    border-radius: 15pt;
+    color: black;
+    padding: 3pt;
+    margin: 3pt;
+  }
+  .headerbar {
+	background-color: #999;
+	padding: 5pt;
+	color: white;
+  border-radius: 99999px;
+  text-align: center;
+  width: fit-content;
+	margin: 0 auto;
+}
+</style>
